@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>AngularJS with paths</title>
+</head>
+<body>
+  <ul>
+    <li><a href="/">home</a></li>
+    <li><a href="/test">test</a></li>
+    <li><a href="/invalid">invalid</a></li>
+  </ul>
+  <div ng-view>loading...</div>
+  <script src="angular.min.js"></script>
+  <script src="angular-route.min.js"></script>
+  <script>
+    'use strict';
+
+    angular.module('myApp', ['ngRoute']).
+        config([
+            '$routeProvider',
+            '$locationProvider',
+            function($routeProvider, $locationProvider) {
+              $routeProvider.
+                  when('/', {templateUrl: 'home.html'}).
+                  when('/test', {templateUrl: 'test.html'}).
+                  otherwise({templateUrl: '404.html'});
+              $locationProvider.html5Mode({enabled: true, rewriteLinks: true});
+            }
+        ]);
+  </script>
+</body>
+</html>
